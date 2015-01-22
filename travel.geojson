@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[-80.2831251980297,25.7705850811705]},"properties":{"marker-symbol":"marker","name":"orlando","previous-sha":"8c3a7891eeba2bf5050998b7dd3cb2559782941b"}}]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[-80.127583,25.782146]},"properties":{"marker-symbol":"marker","name":"orlando","previous-sha":"8c3a7891eeba2bf5050998b7dd3cb2559782941b"}}]}
