@@ -14,7 +14,7 @@ This repo uses a `pre-commit` hook that retrieves the location using OSX's Core 
 
 1. Fork the repo
 1. Install WhereAmI (`brew install whereami`)
-1. Remove travel.geojson and do a commit without hooks (`git commit -m
+1. Remove `travel.geojson` and do a commit without hooks (`git commit -m
    'start over' -n`)
 1. Start doing commits (ex. `git commit -m "Stockholm" --allow-empty`)
 
