@@ -4,5 +4,4 @@ Commits from around the world.
 
 ## Goal
 
-Save the location where I, at least, made a commit for a real project. It
-can be personal or from work.
+Save the location of the places I've visited/stayed.
