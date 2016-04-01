@@ -20,6 +20,11 @@ This repo uses a `pre-commit` hook that retrieves the location using OSX's Core 
    'start over' -n`)
 1. Start doing commits (ex. `git commit -m "Stockholm" --allow-empty`)
 
+## Troubleshooting
+
+Q. Git pre-commit hook is not running
+A. Give run permissions to the file after you copy it. (`chmod +x .git/hooks/pre-commit`)
+
 ## License
 
 Check [LICENSE](LICENSE)
