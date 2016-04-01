@@ -1,0 +1,81 @@
+#!/usr/bin/env ruby
+require 'json'
+require 'pry'
+
+=begin
+Current workflow...
+Pre-commit hook triggers
+Pre-commit opens CWD/travel.geojson
+  if files doesn't exist
+    writes base file
+  end
+
+  Pre-commit hook writes the new location
+=end
+
+# Constants
+FNAME = '/travel.geojson'
+TRAVEL = Dir.pwd + FNAME
+
+# Init...
+puts "Getting location with WhereAmI..."
+sleep 1
+
+coordinates = `whereami`
+coordinates = coordinates.gsub("\n", "").split(',')
+coordinates = coordinates.collect(&:to_f).reverse
+
+get_repo_name_command = "basename `git rev-parse --show-toplevel`"
+get_username_command = "git ls-remote --get-url"
+get_prev_sha_command = "git rev-parse --verify HEAD"
+
+repourl = `#{get_username_command}`
+binding.pry
+username = /git@github.com:(\w*)\/.*/.match(repourl)[1]
+prevsha = `#{get_prev_sha_command}`.gsub("\n",'')
+
+# Retrieving
+puts "Retrieving travel.geojson"
+
+if !File.file?(TRAVEL)
+  puts "Not found, writing file"
+
+  basefile = {
+    type: "FeatureCollection",
+    features:[]
+  }
+
+  File.open(Dir.pwd + FNAME, 'w') do |file|
+    file.write(basefile.to_json)
+  end
+else
+  puts "found, doing nothing"
+end
+
+geojson = {
+  type: 'Feature',
+  geometry: {
+    type: 'Point',
+    coordinates: coordinates
+  },
+  properties: {
+    "marker-symbol" => 'marker',
+    :name => username,
+    'previous-sha' => prevsha
+  }
+}
+
+puts "Updating travel.geojson"
+json = File.read(TRAVEL)
+json = JSON.parse(json)
+json['features'] << geojson
+
+File.open(TRAVEL, 'w') do |file|
+  file.write(json.to_json)
+end
+
+puts "Completed updating travel.geojson"
+git_add_contributors = "git add travel.geojson"
+
+sleep 1
+`#{git_add_contributors}`
