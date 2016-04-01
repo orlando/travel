@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 require 'json'
-require 'pry'
 
 =begin
 Current workflow...
@@ -30,8 +29,7 @@ get_username_command = "git ls-remote --get-url"
 get_prev_sha_command = "git rev-parse --verify HEAD"
 
 repourl = `#{get_username_command}`
-binding.pry
-username = /git@github.com:(\w*)\/.*/.match(repourl)[1]
+username = /github.com(?::|\/)(\w*)\/.*/.match(repourl)[1]
 prevsha = `#{get_prev_sha_command}`.gsub("\n",'')
 
 # Retrieving
